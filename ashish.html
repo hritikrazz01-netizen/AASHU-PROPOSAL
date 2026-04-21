@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffdae0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .card {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 24px;
+            line-height: 1.4;
+        }
+
+        .gif-container img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+            position: absolute; 
+            transition: 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="gif-container">
+            <img id="statusGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXoxZzF0bmYwZndqam5iZnd4Znd4Znd4Znd4Znd4Znd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c7PPX99u8Fm7E/giphy.gif" alt="Cute Cat Asking">
+        </div>
+        <h1 id="question">Will you be Ashish's wife? 💍</h1>
+        
+        <div class="btn-group">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainCard = document.getElementById('mainCard');
+        const statusGif = document.getElementById('statusGif');
+        const question = document.getElementById('question');
+
+        function moveButton() {
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+            
+            noBtn.style.left = `${Math.max(padding, x)}px`;
+            noBtn.style.top = `${Math.max(padding, y)}px`;
+        }
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            moveButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "Knew you would say yes! 🥰";
+            statusGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXoxZzF0bmYwZndqam5iZnd4Znd4Znd4Znd4Znd4Znd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/K99m9oEaFvK7u/giphy.gif";
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+            
+            const happyText = document.createElement('p');
+            happyText.style.color = "#d63384";
+            happyText.style.fontWeight = "bold";
+            happyText.innerText = "You just made me the happiest person in the world! ❤️";
+            mainCard.appendChild(happyText);
+        });
+    </script>
+</body>
+</html>
